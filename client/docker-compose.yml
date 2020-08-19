@@ -5,3 +5,4 @@ services:
     volumes:
       - .:/usr/src/service
     working_dir: /usr/src/service
+
