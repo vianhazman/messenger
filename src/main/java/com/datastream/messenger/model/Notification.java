@@ -11,12 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Builder
 @Document
-public class Message {
+public class Notification {
     private String id;
-    private String chatId;
     private String sender;
-    private String recipient;
-    private String content;
-    private Status status;
-    private String timestamp;
 }
