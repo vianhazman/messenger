@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+    messenger_server:
+      container_name: messenger_server
+      image: vianhazman/messenger:1.0
+      ports:
+        - "8080:8080"
+    messenger_client:
+      container_name: messenger_client
+      image: vianhazman/messenger_client:latest
+      ports:
+        - "80:80"
+    messenger_mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+volumes:
+  mongodb_data_container:
