@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface RoomRepository extends MongoRepository<Room, String> {
     Optional<Room> findBySenderAndRecipient(String sender, String recipient);
+    List<Room> findBySender(String sender);
+
 }

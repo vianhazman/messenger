@@ -2,14 +2,9 @@ version: '3.7'
 services:
     messenger_server:
       container_name: messenger_server
-      image: vianhazman/messenger:1.0
+      image: vianhazman/messenger:latest
       ports:
         - "8080:8080"
-    messenger_client:
-      container_name: messenger_client
-      image: vianhazman/messenger_client:latest
-      ports:
-        - "80:80"
     messenger_mongodb:
     image: mongo:latest
     environment:

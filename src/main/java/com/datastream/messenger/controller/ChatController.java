@@ -39,7 +39,7 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/messages/{senderId}/{recipientId}/count")
+    @GetMapping("/api/messages/{senderId}/{recipientId}/count")
     public ResponseEntity<Long> countNewMessages(
             @PathVariable String senderId,
             @PathVariable String recipientId) {
@@ -48,14 +48,20 @@ public class ChatController {
                 .ok(messageService.countNewMessages(senderId, recipientId));
     }
 
-    @GetMapping("/messages/{senderId}/{recipientId}")
+    @GetMapping("/api/messages/{senderId}/{recipientId}")
     public ResponseEntity<?> findChatMessages ( @PathVariable String senderId,
                                                 @PathVariable String recipientId) {
         return ResponseEntity
                 .ok(messageService.findChatMessages(senderId, recipientId));
     }
 
-    @GetMapping("/messages/{id}")
+    @GetMapping("/api/rooms/{senderId}")
+    public ResponseEntity<?> findChatRooms ( @PathVariable String senderId ) {
+        return ResponseEntity
+                .ok(roomService.findRoomList(senderId));
+    }
+
+    @GetMapping("/api/messages/{id}")
     public ResponseEntity<?> findMessage ( @PathVariable String id) {
         return ResponseEntity
                 .ok(messageService.findById(id));
