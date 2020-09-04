@@ -18,6 +18,6 @@ public class MessageListener {
     )
     public void listen(Message message) {
         System.out.println("sending via kafka listener..");
-        template.convertAndSend("/topic/group", message);
+        template.convertAndSend("/topic/group/"+message.getRecipient(), message);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class ChatController {
     @Autowired private KafkaTemplate<String, Message> kafkaTemplate;
     @Autowired private MessageService messageService;
     @Autowired private RoomService roomService;
+    @Autowired SimpMessagingTemplate template;
 
     @CrossOrigin(origins = "*", maxAge = 3600)
     @PostMapping(value = "/api/send", consumes = "application/json", produces = "application/json")
@@ -34,6 +36,7 @@ public class ChatController {
         try {
             Message saved = messageService.save(message);
             kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC, message).get();
+            System.out.println(message.toString());
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
@@ -68,9 +71,8 @@ public class ChatController {
     }
 
     @MessageMapping("/sendMessage")
-    @SendTo("/topic/group")
+    @SendTo("{receiver}/topic/group")
     public Message broadcastGroupMessage(@Payload Message message) {
-        //Sending this message to all the subscribers
         return message;
     }
 

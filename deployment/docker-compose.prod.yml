@@ -2,7 +2,7 @@ version: '3.7'
 services:
     messenger_server:
       container_name: messenger_server
-      image: vianhazman/messenger:latest
+      image: vianhazman/messenger_server:latest
       ports:
         - "8080:8080"
     messenger_mongodb:
