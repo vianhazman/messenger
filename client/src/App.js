@@ -41,7 +41,11 @@ const App = () => {
       color: randomColor(),
     });
   };
-
+  let getUsername = (user) => {
+    if (user) {
+      return user.username
+    } return ""
+  }
   return (
     <div className="App">
       <h1>messenger</h1>
@@ -49,7 +53,7 @@ const App = () => {
         <>
           <SockJsClient
             url={SOCKET_URL}
-            topics={["/topic/group"]}
+            topics={[`/topic/group/${getUsername(user)}`]}
             onConnect={onConnected}
             onDisconnect={console.log("Disconnected!")}
             onMessage={(msg) => onMessageReceived(msg)}
